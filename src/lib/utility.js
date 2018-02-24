@@ -1,14 +1,14 @@
-export const xy2polar = (x, y) => {
+export const xy2Polar = (x, y) => {
   const r = Math.sqrt(x * x + y * y)
   const phi = Math.atan2(y, x)
   return [r, phi]
 }
 
-export const rad2deg = rad => {
+export const rad2Deg = rad => {
   return (rad + Math.PI) / (2 * Math.PI) * 360
 }
 
-export const hsv2rgb = (hue, saturation, value) => {
+export const hsv2Rgb = (hue, saturation, value) => {
   const chroma = value * saturation
   const hue1 = hue / 60
   const x = chroma * (1 - Math.abs(hue1 % 2 - 1))
@@ -31,4 +31,52 @@ export const hsv2rgb = (hue, saturation, value) => {
   let [r, g, b] = [r1 + m, g1 + m, b1 + m]
 
   return [255 * r, 255 * g, 255 * b]
+}
+
+export const rgb2Hsl = (r, g, b) => {
+  r /= 255
+  g /= 255
+  b /= 255
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  let h, s
+  let l = (max + min) / 2 * 100
+
+  if (max === min) {
+    h = s = 0
+  } else {
+    const d = max - min
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+    s *= 100
+
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0)
+        break
+      case g:
+        h = (b - r) / d + 2
+        break
+      case b:
+        h = (r - g) / d + 4
+        break
+      default:
+        h = 0
+    }
+
+    h /= 6
+    h *= 360
+  }
+
+  return [h, s, l]
+}
+
+const primary2Hex = color => {
+  var hex = color.toString(16)
+  hex = hex.length === 1 ? '0' + hex : hex
+  hex = hex.substring(1) === hex.substring(2) ? hex + hex : hex
+  return hex
+}
+
+export const rgb2Hex = (r, g, b) => {
+  return `#${primary2Hex(r) + primary2Hex(g) + primary2Hex(b)}`
 }

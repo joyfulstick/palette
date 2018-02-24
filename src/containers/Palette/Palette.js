@@ -2,21 +2,18 @@ import React from 'react'
 import HsvCylinder from '../../components/HsvCylider/HsvCylinder'
 import ColorInfo from '../../components/ColorInfo/ColorInfo'
 // import Swatches from '../Swatches/Swatches'
-import { xy2polar, rad2deg, hsv2rgb } from '../../lib/utility'
+import { xy2Polar, rad2Deg, hsv2Rgb, rgb2Hsl, rgb2Hex } from '../../lib/utility'
 import './Palette.css'
 
 class Palette extends React.Component {
   state = {
     value: 1,
-    radius: Math.round(window.innerWidth / 8),
-    rgba: {
-      r: 0,
-      g: 0,
-      b: 0,
-      a: 0,
+    radius: Math.round(window.innerWidth / 5),
+    colors: {
+      rgb: '',
+      hex: '',
+      hsl: '',
     },
-    rgb: '',
-    hex: '',
     // swatches: [],
   }
 
@@ -37,13 +34,13 @@ class Palette extends React.Component {
 
       for (let x = -radius; x < radius; x++) {
         for (let y = -radius; y < radius; y++) {
-          const [r, phi] = xy2polar(x, y)
+          const [r, phi] = xy2Polar(x, y)
 
           if (r > radius) {
             continue
           }
 
-          const deg = rad2deg(phi)
+          const deg = rad2Deg(phi)
 
           const rowLength = 2 * radius
           const adjustedX = x + radius
@@ -55,7 +52,7 @@ class Palette extends React.Component {
           const saturation = r / radius
           const { value } = this.state
 
-          const [red, green, blue] = hsv2rgb(hue, saturation, value)
+          const [red, green, blue] = hsv2Rgb(hue, saturation, value)
           const alpha = 255
 
           data[index] = red
@@ -79,14 +76,14 @@ class Palette extends React.Component {
     const y = event.clientY - bound.y
     const pixel = ctx.getImageData(x, y, 1, 1)
     const { data } = pixel
-    if (data[3] !== 0)
-      this.setState({
-        rgba: { r: data[0], g: data[1], b: data[2] },
-        rgb: `rgb(${data[0]}, ${data[1]}, ${data[2]})`,
-        hex: `#${data[0].toString(16) +
-          data[1].toString(16) +
-          data[2].toString(16)}`,
-      })
+    const [r, g, b] = [data[0], data[1], data[2]]
+    const [h, s, l] = rgb2Hsl(r, g, b)
+    const rgb = `rgb(${r}, ${g}, ${b})`,
+      hex = rgb2Hex(r, g, b),
+      hsl = `hsl(${h.toFixed(0)}, ${s.toFixed(0)}%, ${l.toFixed(0)}%)`
+    if (data[3] !== 0) {
+      this.setState({ colors: { rgb, hex, hsl } })
+    }
   }
 
   handleValueControl = e => {
@@ -104,7 +101,11 @@ class Palette extends React.Component {
           mouseMoved={e => this.handleGetColor(e)}
           chenged={e => this.handleValueControl(e)}
         />
-        <ColorInfo rgb={this.state.rgb} hex={this.state.hex} />
+        <ColorInfo
+          rgb={this.state.colors.rgb}
+          hex={this.state.colors.hex}
+          hsl={this.state.colors.hsl}
+        />
         {/* <Swatches /> */}
       </main>
     )

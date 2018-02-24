@@ -1,3 +1,8 @@
 .color-info {
   grid-area: 2 / 2;
 }
+
+.color-info__sample {
+  margin: 0 1em;
+  text-transform: uppercase;
+}

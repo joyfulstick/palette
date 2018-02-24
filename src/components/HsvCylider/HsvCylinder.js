@@ -11,7 +11,14 @@ const HsvCylinder = props => (
       onMouseMove={props.mouseMoved}
     />
     <label className="range--value">
-      <input type="range" min="0" max="1" step=".01" onChange={props.chenged} />
+      <input
+        className="range--value__input"
+        type="range"
+        min="0"
+        max="1"
+        step=".01"
+        onChange={props.chenged}
+      />
     </label>
   </section>
 )

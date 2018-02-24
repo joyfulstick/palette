@@ -11,3 +11,6 @@
   transform: rotate(-90deg);
   background: linear-gradient(-90deg, #fff, #000);
 }
+
+.range--value__input {
+}
