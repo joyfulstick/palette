@@ -8,7 +8,9 @@ import './Palette.css'
 class Palette extends React.Component {
   state = {
     value: 1,
-    radius: Math.round(window.innerWidth / 5),
+    radius: window.innerWidth > window.innerHeight
+    ? Math.round(window.innerWidth / 6)
+    : Math.round(window.innerHeight / 6),
     colors: {
       rgb: '',
       hex: '',
@@ -19,10 +21,22 @@ class Palette extends React.Component {
 
   componentDidMount() {
     this.updateCanvas()
+    window.addEventListener('resize', () => this.setRadius())  
   }
 
   componentDidUpdate() {
     this.updateCanvas()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', () => this.setRadius())
+  }
+
+  setRadius() {
+    const radius = window.innerWidth > window.innerHeight
+    ? Math.round(window.innerWidth / 6)
+    : Math.round(window.innerHeight / 6)
+    this.setState({radius})
   }
 
   updateCanvas() {
