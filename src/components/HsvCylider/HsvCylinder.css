@@ -1,0 +1,13 @@
+.hsv {
+  grid-area: 1 / 2;
+  display: flex;
+}
+
+.hsv__canvas {
+}
+
+.range--value {
+  align-self: center;
+  transform: rotate(-90deg);
+  background: linear-gradient(-90deg, #fff, #000);
+}

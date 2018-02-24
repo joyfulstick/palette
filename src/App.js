@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import Hsv from './components/Hsv'
-import './App.css'
+import Palette from './containers/Palette/Palette'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Hsv />
+        <Palette />
       </div>
     )
   }
