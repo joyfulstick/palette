@@ -4,15 +4,15 @@ import './HsvCylinder.css'
 const HsvCylinder = props => (
   <section className="hsv">
     <canvas
-      className={props.alpha !== 0
-        ? "hsv__canvas--cursor hsv__canvas"
-        : "hsv__canvas"}
+      className={
+        props.alpha !== 0 ? 'hsv__canvas--cursor hsv__canvas' : 'hsv__canvas'
+      }
       ref={props.canvasRef}
       width={props.diameter}
       height={props.diameter}
       onMouseMove={props.mouseMoved}
     />
-    <label className="range--value" style={{width: props.diameter / 3}}>
+    <form className="range--value" style={{ width: props.diameter / 3 }}>
       <input
         className="range--value__input"
         type="range"
@@ -21,7 +21,7 @@ const HsvCylinder = props => (
         step=".01"
         onChange={props.chenged}
       />
-    </label>
+    </form>
   </section>
 )
 

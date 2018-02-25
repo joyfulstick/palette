@@ -81,17 +81,15 @@ export const rgb2Hex = (r, g, b) => {
   return `#${primary2Hex(r) + primary2Hex(g) + primary2Hex(b)}`
 }
 
-export const triad = (r, g, b) => {
+export const schemeGenerator = (r, g, b, n) => {
   const [h, s, l] = rgb2Hsl(r, g, b)
   let scheme = []
   for (let i = 1; i <= 5; i++) {
     scheme[i - 1] = []
-    for (let j = 0; j < 3; j++) {
-      scheme[i - 1][j] = `hsl(${(h - j * 120).toFixed(0)}, ${s.toFixed(0)}%, ${(
-        l /
-        i *
-        1.2
-      ).toFixed(0)}%)`
+    for (let j = 0; j < n; j++) {
+      scheme[i - 1][j] = `hsl(${(h - j * 360 / n).toFixed(0)}, ${s.toFixed(
+        0,
+      )}%, ${(l / i * 1.2).toFixed(0)}%)`
     }
   }
   return scheme

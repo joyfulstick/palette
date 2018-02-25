@@ -2,7 +2,14 @@ import React from 'react'
 import HsvCylinder from '../../components/HsvCylider/HsvCylinder'
 import ColorInfo from '../../components/ColorInfo/ColorInfo'
 import Swatches from '../../components/Swatches/Swatches'
-import { xy2Polar, rad2Deg, hsv2Rgb, rgb2Hex, triad } from '../../lib/utility'
+import Schemes from '../../components/Schemes/Schemes'
+import {
+  xy2Polar,
+  rad2Deg,
+  hsv2Rgb,
+  rgb2Hex,
+  schemeGenerator,
+} from '../../lib/utility'
 import './Palette.css'
 
 class Palette extends React.Component {
@@ -15,7 +22,8 @@ class Palette extends React.Component {
     },
     hsl: '',
     alpha: 0,
-    triadScheme: [],
+    schemeModel: 1,
+    scheme: [],
   }
 
   componentDidMount() {
@@ -90,17 +98,26 @@ class Palette extends React.Component {
     const pixel = ctx.getImageData(x, y, 1, 1)
     const { data } = pixel
     const [r, g, b, alpha] = [data[0], data[1], data[2], data[3]]
-    const triadScheme = triad(r, g, b)
+    const scheme = schemeGenerator(r, g, b, this.state.schemeModel)
     const rgb = `rgb(${r}, ${g}, ${b})`,
       hex = rgb2Hex(r, g, b)
     alpha !== 0
-      ? this.setState({ rgbColors: { rgb, hex }, triadScheme, alpha })
+      ? this.setState({ rgbColors: { rgb, hex, r, g, b }, scheme, alpha })
       : this.setState({ alpha })
   }
 
   handleValueControl = e => {
     this.setState({
       value: e.target.value,
+    })
+  }
+
+  handleSchemeChange = e => {
+    const { r, g, b } = this.state.rgbColors
+    const scheme = schemeGenerator(r, g, b, +e.target.value)
+    this.setState({
+      schemeModel: +e.target.value,
+      scheme,
     })
   }
 
@@ -118,7 +135,11 @@ class Palette extends React.Component {
           rgb={this.state.rgbColors.rgb}
           hex={this.state.rgbColors.hex}
         />
-        <Swatches triad={this.state.triadScheme} />
+        <Schemes
+          checked={this.state.schemeModel}
+          chenged={e => this.handleSchemeChange(e)}
+        />
+        <Swatches scheme={this.state.scheme} />
       </main>
     )
   }

@@ -1,0 +1,14 @@
+.schemes {
+  display: flex;
+  flex-direction: column;
+  grid-area: 3 / 2;
+}
+
+.scheme__label {
+}
+
+@media (min-width: 600px) {
+  .schemes {
+    grid-area: 2 / 1 / 2 / 3;
+  }
+}
