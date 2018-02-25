@@ -1,8 +1,8 @@
 import React from 'react'
 import HsvCylinder from '../../components/HsvCylider/HsvCylinder'
 import ColorInfo from '../../components/ColorInfo/ColorInfo'
-// import Swatches from '../Swatches/Swatches'
-import { xy2Polar, rad2Deg, hsv2Rgb, rgb2Hsl, rgb2Hex } from '../../lib/utility'
+import Swatches from '../../components/Swatches/Swatches'
+import { xy2Polar, rad2Deg, hsv2Rgb, rgb2Hex, triad } from '../../lib/utility'
 import './Palette.css'
 
 class Palette extends React.Component {
@@ -14,13 +14,13 @@ class Palette extends React.Component {
       hex: '',
     },
     hsl: '',
-    alpha: 0
-    // swatches: [],
+    alpha: 0,
+    triadScheme: [],
   }
 
   componentDidMount() {
     window.addEventListener('resize', () => this.setRadius())
-    this.setRadius()  
+    this.setRadius()
   }
 
   componentDidUpdate() {
@@ -32,10 +32,11 @@ class Palette extends React.Component {
   }
 
   setRadius() {
-    const radius = window.innerWidth > window.innerHeight
-    ? Math.round(window.innerWidth / 6)
-    : Math.round(window.innerHeight / 6)
-    this.setState({radius})
+    const radius =
+      window.innerWidth > window.innerHeight
+        ? Math.round(window.innerWidth / 6)
+        : Math.round(window.innerHeight / 6)
+    this.setState({ radius })
     this.updateCanvas()
   }
 
@@ -88,13 +89,13 @@ class Palette extends React.Component {
     const y = event.clientY - bound.y
     const pixel = ctx.getImageData(x, y, 1, 1)
     const { data } = pixel
-    const alpha = data[3]
-    const [r, g, b] = [data[0], data[1], data[2]]
-    const [h, s, l] = rgb2Hsl(r, g, b)
+    const [r, g, b, alpha] = [data[0], data[1], data[2], data[3]]
+    const triadScheme = triad(r, g, b)
     const rgb = `rgb(${r}, ${g}, ${b})`,
-      hex = rgb2Hex(r, g, b),
-      hsl = `hsl(${h.toFixed(0)}, ${s.toFixed(0)}%, ${l.toFixed(0)}%)`
-    alpha !== 0 ? this.setState({ rgbColors: { rgb, hex }, hsl, alpha }) : this.setState({alpha})
+      hex = rgb2Hex(r, g, b)
+    alpha !== 0
+      ? this.setState({ rgbColors: { rgb, hex }, triadScheme, alpha })
+      : this.setState({ alpha })
   }
 
   handleValueControl = e => {
@@ -117,7 +118,7 @@ class Palette extends React.Component {
           rgb={this.state.rgbColors.rgb}
           hex={this.state.rgbColors.hex}
         />
-        {/* <Swatches /> */}
+        <Swatches triad={this.state.triadScheme} />
       </main>
     )
   }

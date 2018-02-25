@@ -4,7 +4,6 @@
 }
 
 .hsv__canvas {
-  transform: rotate(90deg)
 }
 
 .hsv__canvas--cursor {
