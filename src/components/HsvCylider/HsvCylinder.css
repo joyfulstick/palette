@@ -4,13 +4,19 @@
 }
 
 .hsv__canvas {
+  transform: rotate(90deg)
+}
+
+.hsv__canvas--cursor {
+  cursor: crosshair;
 }
 
 .range--value {
   align-self: center;
   transform: rotate(-90deg);
-  background: linear-gradient(-90deg, #fff, #000);
 }
 
 .range--value__input {
+  cursor: pointer;
+  background: linear-gradient(-90deg, #fff, #000);
 }

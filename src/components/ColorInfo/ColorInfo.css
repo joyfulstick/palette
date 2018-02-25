@@ -1,4 +1,5 @@
 .color-info {
+  width: 14rem;
   grid-area: 2 / 2;
 }
 
@@ -6,3 +7,11 @@
   margin: 0 1em;
   text-transform: uppercase;
 }
+
+@media(min-width: 600px) {
+  .color-info {
+    grid-area: 1 / 1;
+    justify-self: end;
+  }
+}
+

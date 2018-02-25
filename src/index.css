@@ -10,3 +10,12 @@ body {
   color: var(--color-font);
   background: var(--color-main);
 }
+
+input[type=range] {
+  appearance: none;
+  width: 100%;
+}
+
+input[type=range]:focus {
+  outline: none;
+}

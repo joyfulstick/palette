@@ -8,20 +8,19 @@ import './Palette.css'
 class Palette extends React.Component {
   state = {
     value: 1,
-    radius: window.innerWidth > window.innerHeight
-    ? Math.round(window.innerWidth / 6)
-    : Math.round(window.innerHeight / 6),
-    colors: {
+    radius: 1,
+    rgbColors: {
       rgb: '',
       hex: '',
-      hsl: '',
     },
+    hsl: '',
+    alpha: 0
     // swatches: [],
   }
 
   componentDidMount() {
-    this.updateCanvas()
-    window.addEventListener('resize', () => this.setRadius())  
+    window.addEventListener('resize', () => this.setRadius())
+    this.setRadius()  
   }
 
   componentDidUpdate() {
@@ -37,6 +36,7 @@ class Palette extends React.Component {
     ? Math.round(window.innerWidth / 6)
     : Math.round(window.innerHeight / 6)
     this.setState({radius})
+    this.updateCanvas()
   }
 
   updateCanvas() {
@@ -50,9 +50,7 @@ class Palette extends React.Component {
         for (let y = -radius; y < radius; y++) {
           const [r, phi] = xy2Polar(x, y)
 
-          if (r > radius) {
-            continue
-          }
+          if (r > radius) continue
 
           const deg = rad2Deg(phi)
 
@@ -90,14 +88,13 @@ class Palette extends React.Component {
     const y = event.clientY - bound.y
     const pixel = ctx.getImageData(x, y, 1, 1)
     const { data } = pixel
+    const alpha = data[3]
     const [r, g, b] = [data[0], data[1], data[2]]
     const [h, s, l] = rgb2Hsl(r, g, b)
     const rgb = `rgb(${r}, ${g}, ${b})`,
       hex = rgb2Hex(r, g, b),
       hsl = `hsl(${h.toFixed(0)}, ${s.toFixed(0)}%, ${l.toFixed(0)}%)`
-    if (data[3] !== 0) {
-      this.setState({ colors: { rgb, hex, hsl } })
-    }
+    alpha !== 0 ? this.setState({ rgbColors: { rgb, hex }, hsl, alpha }) : this.setState({alpha})
   }
 
   handleValueControl = e => {
@@ -112,13 +109,13 @@ class Palette extends React.Component {
         <HsvCylinder
           canvasRef={el => (this.canvas = el)}
           diameter={this.state.radius * 2}
+          alpha={this.state.alpha}
           mouseMoved={e => this.handleGetColor(e)}
           chenged={e => this.handleValueControl(e)}
         />
         <ColorInfo
-          rgb={this.state.colors.rgb}
-          hex={this.state.colors.hex}
-          hsl={this.state.colors.hsl}
+          rgb={this.state.rgbColors.rgb}
+          hex={this.state.rgbColors.hex}
         />
         {/* <Swatches /> */}
       </main>
