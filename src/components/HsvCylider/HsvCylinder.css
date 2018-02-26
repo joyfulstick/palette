@@ -1,13 +1,24 @@
+canvas {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 .hsv {
   grid-area: 1 / 2;
   display: flex;
+  position: relative;
 }
 
-.hsv__canvas {
-}
-
-.hsv__canvas--cursor {
+.canvas--picking {
   cursor: crosshair;
+}
+
+.canvas--picked {
+  cursor: pointer;
+}
+
+.color--picked {
+  position: absolute;
+  right: 9vw;
 }
 
 .range--value {

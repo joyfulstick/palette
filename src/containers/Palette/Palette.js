@@ -24,6 +24,7 @@ class Palette extends React.Component {
     alpha: 0,
     schemeModel: 1,
     scheme: [],
+    picking: true,
   }
 
   componentDidMount() {
@@ -101,7 +102,7 @@ class Palette extends React.Component {
     const scheme = schemeGenerator(r, g, b, this.state.schemeModel)
     const rgb = `rgb(${r}, ${g}, ${b})`,
       hex = rgb2Hex(r, g, b)
-    alpha !== 0
+    alpha !== 0 && this.state.picking
       ? this.setState({ rgbColors: { rgb, hex, r, g, b }, scheme, alpha })
       : this.setState({ alpha })
   }
@@ -121,6 +122,12 @@ class Palette extends React.Component {
     })
   }
 
+  handlePick = () => {
+    this.setState(prevState => {
+      return { picking: !prevState.picking }
+    })
+  }
+
   render() {
     return (
       <main className="main">
@@ -128,8 +135,10 @@ class Palette extends React.Component {
           canvasRef={el => (this.canvas = el)}
           diameter={this.state.radius * 2}
           alpha={this.state.alpha}
+          picking={this.state.picking}
           mouseMoved={e => this.handleGetColor(e)}
           chenged={e => this.handleValueControl(e)}
+          clicked={this.handlePick}
         />
         <ColorInfo
           rgb={this.state.rgbColors.rgb}

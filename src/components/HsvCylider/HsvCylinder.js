@@ -5,13 +5,17 @@ const HsvCylinder = props => (
   <section className="hsv">
     <canvas
       className={
-        props.alpha !== 0 ? 'hsv__canvas--cursor hsv__canvas' : 'hsv__canvas'
+        props.alpha !== 0 && props.picking
+          ? 'canvas--picking'
+          : 'canvas--picked'
       }
       ref={props.canvasRef}
       width={props.diameter}
       height={props.diameter}
       onMouseMove={props.mouseMoved}
+      onClick={props.clicked}
     />
+    {!props.picking && <em className="color--picked">Picked!</em>}
     <form className="range--value" style={{ width: props.diameter / 3 }}>
       <input
         className="range--value__input"

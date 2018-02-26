@@ -5,7 +5,7 @@
 .swatches__samples {
   display: flex;
   width: 1fr;
-  height: 3rem;
+  height: 2rem;
 }
 
 .samples__color {
@@ -16,5 +16,8 @@
 @media (min-width: 600px) {
   .swatches {
     grid-area: 1 / 3 / 3 / 3;
+  }
+  .swatches__samples {
+    height: 4rem;
   }
 }
