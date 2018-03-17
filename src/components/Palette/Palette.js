@@ -4,11 +4,11 @@ import ColorInfo from '../../components/ColorInfo/ColorInfo'
 import Swatches from '../../components/Swatches/Swatches'
 import Schemes from '../../components/Schemes/Schemes'
 import {
-  xy2Polar,
-  rad2Deg,
-  hsv2Rgb,
-  rgb2Hex,
-  schemeGenerator,
+  xyToPolar,
+  radToDeg,
+  hsvToRgb,
+  rgbToHex,
+  schemesGenerator,
 } from '../../lib/utility'
 import './Palette.css'
 
@@ -23,7 +23,7 @@ class Palette extends React.Component {
     hsl: '',
     alpha: 0,
     schemeModel: 1,
-    scheme: [],
+    schemes: [],
     picking: true,
   }
 
@@ -58,11 +58,11 @@ class Palette extends React.Component {
 
       for (let x = -radius; x < radius; x++) {
         for (let y = -radius; y < radius; y++) {
-          const [r, phi] = xy2Polar(x, y)
+          const [r, phi] = xyToPolar(x, y)
 
           if (r > radius) continue
 
-          const deg = rad2Deg(phi)
+          const deg = radToDeg(phi)
 
           const rowLength = 2 * radius
           const adjustedX = x + radius
@@ -74,7 +74,7 @@ class Palette extends React.Component {
           const saturation = r / radius
           const { value } = this.state
 
-          const [red, green, blue] = hsv2Rgb(hue, saturation, value)
+          const [red, green, blue] = hsvToRgb(hue, saturation, value)
           const alpha = 255
 
           data[index] = red
@@ -99,11 +99,11 @@ class Palette extends React.Component {
     const pixel = ctx.getImageData(x, y, 1, 1)
     const { data } = pixel
     const [r, g, b, alpha] = [data[0], data[1], data[2], data[3]]
-    const scheme = schemeGenerator(r, g, b, this.state.schemeModel)
+    const schemes = schemesGenerator(r, g, b, this.state.schemeModel)
     const rgb = `rgb(${r}, ${g}, ${b})`,
-      hex = rgb2Hex(r, g, b)
+      hex = rgbToHex(r, g, b)
     alpha !== 0 && this.state.picking
-      ? this.setState({ rgbColors: { rgb, hex, r, g, b }, scheme, alpha })
+      ? this.setState({ rgbColors: { rgb, hex, r, g, b }, schemes, alpha })
       : this.setState({ alpha })
   }
 
@@ -115,10 +115,10 @@ class Palette extends React.Component {
 
   handleSchemeChange = e => {
     const { r, g, b } = this.state.rgbColors
-    const scheme = schemeGenerator(r, g, b, +e.target.value)
+    const schemes = schemesGenerator(r, g, b, +e.target.value)
     this.setState({
       schemeModel: +e.target.value,
-      scheme,
+      schemes,
     })
   }
 
@@ -148,7 +148,7 @@ class Palette extends React.Component {
           checked={this.state.schemeModel}
           chenged={e => this.handleSchemeChange(e)}
         />
-        <Swatches scheme={this.state.scheme} />
+        <Swatches schemes={this.state.schemes} />
       </main>
     )
   }

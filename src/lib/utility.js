@@ -1,14 +1,14 @@
-export const xy2Polar = (x, y) => {
+export const xyToPolar = (x, y) => {
   const r = Math.sqrt(x * x + y * y)
   const phi = Math.atan2(y, x)
   return [r, phi]
 }
 
-export const rad2Deg = rad => {
+export const radToDeg = rad => {
   return (rad + Math.PI) / (2 * Math.PI) * 360
 }
 
-export const hsv2Rgb = (hue, saturation, value) => {
+export const hsvToRgb = (hue, saturation, value) => {
   const chroma = value * saturation
   const hue1 = hue / 60
   const x = chroma * (1 - Math.abs(hue1 % 2 - 1))
@@ -33,64 +33,61 @@ export const hsv2Rgb = (hue, saturation, value) => {
   return [255 * r, 255 * g, 255 * b]
 }
 
-export const rgb2Hsl = (r, g, b) => {
+export const rgbToHsl = (r, g, b) => {
   r /= 255
   g /= 255
   b /= 255
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
   let h, s
-  let l = (max + min) / 2 * 100
+  let l = (max + min) / 2
 
   if (max === min) {
     h = s = 0
   } else {
-    const d = max - min
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
-    s *= 100
+    const diff = max - min
+    s = l > .5 ? diff / (2 - max - min) : diff / (max + min)
 
     switch (max) {
       case r:
-        h = (g - b) / d + (g < b ? 6 : 0)
+        h = (g - b) / diff + (g < b ? 6 : 0)
         break
       case g:
-        h = (b - r) / d + 2
+        h = (b - r) / diff + 2
         break
       case b:
-        h = (r - g) / d + 4
+        h = (r - g) / diff + 4
         break
       default:
         h = 0
     }
-
-    h /= 6
-    h *= 360
+    h *= 60
+    s *= 100
+    l *= 100
   }
 
   return [h, s, l]
 }
 
-const primary2Hex = color => {
+const primaryToHex = color => {
   var hex = color.toString(16)
   hex = hex.length === 1 ? '0' + hex : hex
   hex = hex.substring(1) === hex.substring(2) ? hex + hex : hex
   return hex
 }
 
-export const rgb2Hex = (r, g, b) => {
-  return `#${primary2Hex(r) + primary2Hex(g) + primary2Hex(b)}`
+export const rgbToHex = (r, g, b) => {
+  return `#${primaryToHex(r) + primaryToHex(g) + primaryToHex(b)}`
 }
 
-export const schemeGenerator = (r, g, b, n) => {
-  const [h, s, l] = rgb2Hsl(r, g, b)
-  let scheme = []
+export const schemesGenerator = (r, g, b, n) => {
+  const [h, s, l] = rgbToHsl(r, g, b)
+  let schemes = []
   for (let i = 1; i <= 5; i++) {
-    scheme[i - 1] = []
+    schemes[i - 1] = []
     for (let j = 0; j < n; j++) {
-      scheme[i - 1][j] = `hsl(${(h - j * 360 / n).toFixed(0)}, ${s.toFixed(
-        0,
-      )}%, ${(l / i * 1.2).toFixed(0)}%)`
+      schemes[i - 1][j] = `hsl(${h - j * 360 / n}, ${s}%, ${l / i}%)`
     }
   }
-  return scheme
+  return schemes
 }

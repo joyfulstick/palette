@@ -3,7 +3,7 @@ import './Swatches.css'
 
 const Swatches = props => (
   <section className="swatches">
-    {props.scheme.map((swatch, i) => (
+    {props.schemes.map((swatch, i) => (
       <div className="swatches__samples" key={i}>
         {swatch.map((color, i) => (
           <div
