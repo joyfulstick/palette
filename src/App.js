@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Palette from './containers/Palette/Palette'
+import Palette from './components/Palette/Palette'
 
 class App extends Component {
   render() {
