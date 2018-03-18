@@ -46,7 +46,7 @@ export const rgbToHsl = (r, g, b) => {
     h = s = 0
   } else {
     const diff = max - min
-    s = l > .5 ? diff / (2 - max - min) : diff / (max + min)
+    s = l > 0.5 ? diff / (2 - max - min) : diff / (max + min)
 
     switch (max) {
       case r:
@@ -70,7 +70,7 @@ export const rgbToHsl = (r, g, b) => {
 }
 
 const primaryToHex = color => {
-  var hex = color.toString(16)
+  let hex = color.toString(16)
   hex = hex.length === 1 ? '0' + hex : hex
   hex = hex.substring(1) === hex.substring(2) ? hex + hex : hex
   return hex
@@ -78,6 +78,18 @@ const primaryToHex = color => {
 
 export const rgbToHex = (r, g, b) => {
   return `#${primaryToHex(r) + primaryToHex(g) + primaryToHex(b)}`
+}
+
+export const rgbStringToHex = rgb => {
+  rgb = rgb.match(
+    /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i,
+  )
+  return rgb && rgb.length === 4
+    ? '#' +
+        ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+        ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+        ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2)
+    : ''
 }
 
 export const schemesGenerator = (r, g, b, n) => {

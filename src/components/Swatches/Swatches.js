@@ -2,7 +2,7 @@ import React from 'react'
 import './Swatches.css'
 
 const Swatches = props => (
-  <section className="swatches">
+  <section ref={props.swatchesRef} className="swatches">
     {props.schemes.map((swatch, i) => (
       <div className="swatches__samples" key={i}>
         {swatch.map((color, i) => (

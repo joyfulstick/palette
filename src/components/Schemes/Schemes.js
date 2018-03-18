@@ -4,7 +4,7 @@ import './Schemes.css'
 
 const Schemes = props => (
   <form className="schemes">
-    {COLOR_SCHEMES.map(scheme =>
+    {COLOR_SCHEMES.map(scheme => (
       <label className="scheme__label" htmlFor={scheme.name} key={scheme.id}>
         <input
           type="radio"
@@ -15,7 +15,8 @@ const Schemes = props => (
           checked={props.checked === scheme.id}
         />
         {scheme.name}
-      </label>)}
+      </label>
+    ))}
   </form>
 )
 

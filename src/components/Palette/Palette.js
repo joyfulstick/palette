@@ -8,6 +8,7 @@ import {
   radToDeg,
   hsvToRgb,
   rgbToHex,
+  rgbStringToHex,
   schemesGenerator,
 } from '../../lib/utility'
 import './Palette.css'
@@ -25,6 +26,7 @@ class Palette extends React.Component {
     schemeModel: 1,
     schemes: [],
     picking: true,
+    css: '',
   }
 
   componentDidMount() {
@@ -122,10 +124,40 @@ class Palette extends React.Component {
     })
   }
 
+  handleCreateCss = () => {
+    const swatches = this.swatches.children
+    let values = []
+    for (let i = 0; i < swatches.length; i++) {
+      for (let j = 0; j < swatches[i].children.length; j++) {
+        values.push(
+          `--color${j}-tone${i}: ${rgbStringToHex(
+            swatches[i].children[j].style.background,
+          )}`,
+        )
+      }
+    }
+    const css = `:root&nbsp;{<br/>&nbsp;&nbsp;${values.join(
+      ';<br/>&nbsp;&nbsp;',
+    )};<br/>}`
+    this.setState({ css })
+    // console.log(`:root{\n  ${values.join(';\n  ')};\n}`) // eslint-disable-line
+  }
+
   handlePick = () => {
     this.setState(prevState => {
       return { picking: !prevState.picking }
     })
+    this.handleCreateCss()
+  }
+
+  handleSelect = e => {
+    const code = document.createRange()
+    code.setStartBefore(e.target)
+    code.setEndAfter(e.target)
+    window.getSelection().removeAllRanges()
+    window.getSelection().addRange(code)
+    document.execCommand('Copy')
+    alert('Code has been copied to clipboard :)')
   }
 
   render() {
@@ -148,7 +180,22 @@ class Palette extends React.Component {
           checked={this.state.schemeModel}
           chenged={e => this.handleSchemeChange(e)}
         />
-        <Swatches schemes={this.state.schemes} />
+        <Swatches
+          schemes={this.state.schemes}
+          swatchesRef={el => (this.swatches = el)}
+        />
+        {!this.state.picking && (
+          <div className="css">
+            <code
+              className="css__code"
+              dangerouslySetInnerHTML={{ __html: this.state.css }}
+              onClick={e => this.handleSelect(e)}
+            />
+            <button className="css__button" onClick={this.handlePick}>
+              Pick another color
+            </button>
+          </div>
+        )}
       </main>
     )
   }

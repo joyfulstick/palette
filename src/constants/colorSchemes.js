@@ -1,18 +1,18 @@
 export const COLOR_SCHEMES = [
   {
     id: 1,
-    name: "Monochromatic",
+    name: 'Monochromatic',
   },
   {
     id: 2,
-    name: "Complementary",
+    name: 'Complementary',
   },
   {
     id: 3,
-    name: "Triadic",
+    name: 'Triadic',
   },
   {
     id: 4,
-    name: "Tetradic",
+    name: 'Tetradic',
   },
 ]
