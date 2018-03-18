@@ -11,11 +11,9 @@
 @media (min-width: 600px) {
   .schemes {
     grid-area: 2 / 1;
+    margin-top: -30%;
   }
 }
 
 @media (min-width: 900px) {
-  .schemes {
-    grid-area: 2 / 2;
-  }
 }

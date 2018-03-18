@@ -12,6 +12,14 @@ export const COLOR_SCHEMES = [
     name: 'Triadic',
   },
   {
+    id: 3.1,
+    name: 'Analogous',
+  },
+  {
+    id: 3.5,
+    name: 'Compound',
+  },
+  {
     id: 4,
     name: 'Tetradic',
   },

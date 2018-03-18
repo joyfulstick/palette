@@ -94,11 +94,20 @@ export const rgbStringToHex = rgb => {
 
 export const schemesGenerator = (r, g, b, n) => {
   const [h, s, l] = rgbToHsl(r, g, b)
+  const nFloor = Math.floor(n)
   let schemes = []
   for (let i = 1; i <= 5; i++) {
     schemes[i - 1] = []
-    for (let j = 0; j < n; j++) {
-      schemes[i - 1][j] = `hsl(${h - j * 360 / n}, ${s}%, ${l / i}%)`
+    for (let j = 0; j < nFloor; j++) {
+      if (Number.isInteger(n)) {
+        let hue = h - j * 360 / n
+        if (hue < 0) hue += 360
+        schemes[i - 1][j] = `hsl(${hue}, ${s}%, ${l / i}%)`
+      } else {
+        let hue = h - j * 300 * (n - nFloor)
+        if (hue < 0) hue += 360
+        schemes[i - 1][j] = `hsl(${hue}, ${s}%, ${l / i}%)`
+      }
     }
   }
   return schemes

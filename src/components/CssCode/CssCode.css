@@ -28,17 +28,14 @@
 }
 
 @media (min-width: 600px) {
-  .css {
-    position: relative;
-    grid-area: 2 / 2;
-    background: none;
-    left: 0;
-    transform: translate(0);
-  }
 }
 
 @media (min-width: 900px) {
   .css {
+    left: 0;
+    transform: translate(0);
+    background: none;
+    position: relative;
     grid-area: 2 / 3;
     max-width: 100%;
     margin-top: -10%;
