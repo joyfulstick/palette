@@ -8,7 +8,7 @@ const CssCode = props => (
       dangerouslySetInnerHTML={props.innerHTML}
       onClick={props.clicked}
     />
-    <button className="css__button" onClick={this.handlePick}>
+    <button className="css__button" onClick={props.clickedButton}>
       Pick another color
     </button>
   </div>

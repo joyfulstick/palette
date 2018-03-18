@@ -122,6 +122,7 @@ class Palette extends React.Component {
     this.setState({
       schemeModel: +e.target.value,
       schemes,
+      picking: true,
     })
   }
 
@@ -189,6 +190,7 @@ class Palette extends React.Component {
           <CssCode
             innerHTML={{ __html: this.state.css }}
             clicked={e => this.handleSelect(e)}
+            clickedButton={this.handlePick}
           />
         )}
       </main>
