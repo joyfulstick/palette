@@ -1,8 +1,9 @@
 import React from 'react'
-import HsvCylinder from '../../components/HsvCylider/HsvCylinder'
-import ColorInfo from '../../components/ColorInfo/ColorInfo'
-import Swatches from '../../components/Swatches/Swatches'
-import Schemes from '../../components/Schemes/Schemes'
+import HsvCylinder from '../HsvCylider/HsvCylinder'
+import ColorInfo from '../ColorInfo/ColorInfo'
+import Swatches from '../Swatches/Swatches'
+import Schemes from '../Schemes/Schemes'
+import CssCode from '../CssCode/CssCode'
 import {
   xyToPolar,
   radToDeg,
@@ -130,7 +131,7 @@ class Palette extends React.Component {
     for (let i = 0; i < swatches.length; i++) {
       for (let j = 0; j < swatches[i].children.length; j++) {
         values.push(
-          `--color${j}-tone${i}: ${rgbStringToHex(
+          `--color${j}-shade${i}: ${rgbStringToHex(
             swatches[i].children[j].style.background,
           )}`,
         )
@@ -185,16 +186,10 @@ class Palette extends React.Component {
           swatchesRef={el => (this.swatches = el)}
         />
         {!this.state.picking && (
-          <div className="css">
-            <code
-              className="css__code"
-              dangerouslySetInnerHTML={{ __html: this.state.css }}
-              onClick={e => this.handleSelect(e)}
-            />
-            <button className="css__button" onClick={this.handlePick}>
-              Pick another color
-            </button>
-          </div>
+          <CssCode
+            innerHTML={{ __html: this.state.css }}
+            clicked={e => this.handleSelect(e)}
+          />
         )}
       </main>
     )
