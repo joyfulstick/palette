@@ -12,6 +12,8 @@ const ColorInput = props => {
         placeholder="HEX or RGB"
         pattern={pattern}
         onChange={props.chenged}
+        value={props.value}
+        onBlur={props.blured}
       />
     </label>
   )

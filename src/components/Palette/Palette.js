@@ -32,6 +32,7 @@ class Palette extends React.Component {
     schemes: [],
     picking: true,
     css: '',
+    inputValue: '',
   }
 
   componentDidMount() {
@@ -177,6 +178,7 @@ class Palette extends React.Component {
 
   handleInput = e => {
     const { value } = e.target
+    this.setState({ inputValue: value })
     let rgbArr = [],
       rgb = '',
       hex = ''
@@ -199,6 +201,8 @@ class Palette extends React.Component {
     const schemes = schemesGenerator(r, g, b, this.state.schemeModel)
     this.setState({ rgbColors: { rgb, hex, r, g, b }, schemes })
   }
+
+  handleBlur = () => this.setState({ inputValue: '' })
 
   render() {
     return (
@@ -231,7 +235,11 @@ class Palette extends React.Component {
             clickedButton={this.handlePick}
           />
         )}
-        <ColorInput chenged={this.handleInput} />
+        <ColorInput
+          chenged={this.handleInput}
+          value={this.state.inputValue}
+          blured={this.handleBlur}
+        />
       </main>
     )
   }
