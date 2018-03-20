@@ -69,16 +69,8 @@ export const rgbToHsl = (r, g, b) => {
   return [h, s, l]
 }
 
-const primaryToHex = color => {
-  let hex = color.toString(16)
-  hex = hex.length === 1 ? '0' + hex : hex
-  hex = hex.substring(1) === hex.substring(2) ? hex + hex : hex
-  return hex
-}
-
-export const rgbToHex = (r, g, b) => {
-  return `#${primaryToHex(r) + primaryToHex(g) + primaryToHex(b)}`
-}
+export const rgbToHex = (r, g, b) =>
+  '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')
 
 export const rgbStringToHex = rgb => {
   rgb = rgb.match(
@@ -92,10 +84,28 @@ export const rgbStringToHex = rgb => {
     : ''
 }
 
+export const arrayToRgbString = arr => `rgb(${arr.join(',')})`
+
+export const hexToRgb = hex => {
+  const rgba = hex
+    .replace(
+      /^#?([a-f\d])([a-f\d])([a-f\d])([a-f\d])?$/i,
+      (m, r, g, b, a = 'f') => '#' + r + r + g + g + b + b + a + a,
+    )
+    .substring(1)
+    .match(/.{2}/g)
+    .map(x => parseInt(x, 16))
+
+  const alpha = rgba.slice(-1)[0] / 255
+  rgba.splice(3, 1, Math.round(alpha * 100) / 100)
+  return rgba
+}
+
 export const schemesGenerator = (r, g, b, n) => {
   const [h, s, l] = rgbToHsl(r, g, b)
-  const nFloor = Math.floor(n)
   let schemes = []
+  if (s === 0) return schemes
+  const nFloor = Math.floor(n)
   for (let i = 1; i <= 5; i++) {
     schemes[i - 1] = []
     for (let j = 0; j < nFloor; j++) {

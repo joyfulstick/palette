@@ -1,16 +1,20 @@
 import React from 'react'
-import HsvCylinder from '../HsvCylider/HsvCylinder'
 import ColorInfo from '../ColorInfo/ColorInfo'
-import Swatches from '../Swatches/Swatches'
-import Schemes from '../Schemes/Schemes'
+import ColorInput from '../ColorInput/ColorInput'
 import CssCode from '../CssCode/CssCode'
+import HsvCylinder from '../HsvCylider/HsvCylinder'
+import Schemes from '../Schemes/Schemes'
+import Swatches from '../Swatches/Swatches'
+import { COLOR_PATTERN } from '../../constants/patterns'
 import {
-  xyToPolar,
-  radToDeg,
+  arrayToRgbString,
+  hexToRgb,
   hsvToRgb,
+  radToDeg,
   rgbToHex,
   rgbStringToHex,
   schemesGenerator,
+  xyToPolar,
 } from '../../lib/utility'
 import './Palette.css'
 
@@ -162,6 +166,31 @@ class Palette extends React.Component {
     alert('Code has been copied to clipboard :)')
   }
 
+  handleInput = e => {
+    const { value } = e.target
+    let rgbArr = [],
+      rgb = '',
+      hex = ''
+    if (!COLOR_PATTERN.test(value)) return
+    if (value.match(/^r/)) {
+      rgbArr = value
+        .replace(/[^\d,]/g, '')
+        .split(',')
+        .map(x => +x)
+      rgb = value
+      hex = rgbStringToHex(value)
+    } else if (value.match(/^#/)) {
+      rgbArr = hexToRgb(value)
+      rgb = arrayToRgbString(rgbArr)
+      hex = value
+    } else if (value.match(/^h/)) {
+      this.setState({ hsl: value })
+    }
+    const [r, g, b] = rgbArr
+    const schemes = schemesGenerator(r, g, b, this.state.schemeModel)
+    this.setState({ rgbColors: { rgb, hex, r, g, b }, schemes })
+  }
+
   render() {
     return (
       <main className="main">
@@ -193,6 +222,7 @@ class Palette extends React.Component {
             clickedButton={this.handlePick}
           />
         )}
+        <ColorInput chenged={this.handleInput} />
       </main>
     )
   }
