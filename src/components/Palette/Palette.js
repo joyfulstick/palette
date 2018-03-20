@@ -15,7 +15,7 @@ import {
   rgbStringToHex,
   schemesGenerator,
   xyToPolar,
-} from '../../lib/utility'
+} from '../../lib/utilities'
 import './Palette.css'
 
 class Palette extends React.Component {

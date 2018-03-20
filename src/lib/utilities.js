@@ -102,9 +102,9 @@ export const hexToRgb = hex => {
 }
 
 export const schemesGenerator = (r, g, b, n) => {
-  const [h, s, l] = rgbToHsl(r, g, b)
+  let [h, s, l] = rgbToHsl(r, g, b)
   let schemes = []
-  if (s === 0) return schemes
+  if (s === 0) l *= 100
   const nFloor = Math.floor(n)
   for (let i = 1; i <= 5; i++) {
     schemes[i - 1] = []
