@@ -136,7 +136,6 @@ class Palette extends React.Component {
     this.setState({
       schemeModel: +e.target.value,
       schemes,
-      picking: true,
     })
   }
 

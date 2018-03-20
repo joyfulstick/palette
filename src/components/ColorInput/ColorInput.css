@@ -1,7 +1,7 @@
 .color-input {
   grid-area: 2 / 2;
   align-self: start;
-  margin: 1rem;
+  margin: 2rem 0;
   width: 50%;
   justify-self: left;
 }

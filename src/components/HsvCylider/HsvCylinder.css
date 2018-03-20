@@ -20,6 +20,7 @@ canvas {
   position: absolute;
   right: 9vw;
   cursor: default;
+  animation: picked 0.1s ease-in;
 }
 
 .range--value {
@@ -30,4 +31,15 @@ canvas {
 .range--value__input {
   cursor: pointer;
   background: linear-gradient(-90deg, #fff, #000);
+}
+
+@keyframes picked {
+  from {
+    transform: scale(2);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
