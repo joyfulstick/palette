@@ -115,8 +115,17 @@ class Palette extends React.Component {
   }
 
   handleValueControl = e => {
+    const { value } = e.target
+    const { r, g, b } = this.state.rgbColors
+    const schemes = schemesGenerator(
+      r * value,
+      g * value,
+      b * value,
+      this.state.schemeModel,
+    )
     this.setState({
-      value: e.target.value,
+      value,
+      schemes,
     })
   }
 
