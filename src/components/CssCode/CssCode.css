@@ -17,14 +17,24 @@
   background: #0005;
   white-space: nowrap;
   overflow: auto;
+  cursor: copy;
 }
 
-.css__button {
+.button--exit {
   margin: 1em;
   background: none;
   border: none;
   outline: none;
   color: #9cf0ff;
+  cursor: pointer;
+}
+
+.button--css {
+  grid-area: 2 / 2;
+  align-self: start;
+  margin: 1rem;
+  width: 20%;
+  justify-self: right;
 }
 
 @media (min-width: 600px) {
@@ -39,5 +49,8 @@
     grid-area: 2 / 3;
     max-width: 100%;
     margin-top: -10%;
+  }
+  .button--css {
+    margin: 1rem 30% 1rem 0;
   }
 }

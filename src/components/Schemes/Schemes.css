@@ -6,6 +6,7 @@
 }
 
 .scheme__label {
+  cursor: pointer;
 }
 
 @media (min-width: 600px) {

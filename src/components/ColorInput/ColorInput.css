@@ -1,11 +1,20 @@
 .color-input {
   grid-area: 2 / 2;
-  align-self: center;
+  align-self: start;
   margin: 1rem;
+  width: 50%;
+  justify-self: left;
+}
+
+.color-input__element {
+  width: 100%;
 }
 
 @media (min-width: 600px) {
 }
 
 @media (min-width: 900px) {
+  .color-input {
+    width: 30%;
+  }
 }

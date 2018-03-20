@@ -2,6 +2,7 @@
   grid-area: 3 / 2;
   justify-self: end;
   align-self: end;
+  cursor: default;
 }
 
 .color-info__sample {

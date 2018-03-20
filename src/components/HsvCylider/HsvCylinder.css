@@ -19,6 +19,7 @@ canvas {
 .color--picked {
   position: absolute;
   right: 9vw;
+  cursor: default;
 }
 
 .range--value {

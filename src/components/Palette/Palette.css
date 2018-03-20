@@ -6,8 +6,14 @@
   margin: 4vw;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1280px) {
   .main {
-    grid-template-columns: repeat(2, auto) 1fr;
+    margin: 4vw 8vw;
+  }
+}
+
+@media (min-width: 1600px) {
+  .main {
+    margin: 4vw 12vw;
   }
 }

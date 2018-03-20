@@ -163,7 +163,6 @@ class Palette extends React.Component {
     this.setState(prevState => {
       return { picking: !prevState.picking }
     })
-    this.handleCreateCss()
   }
 
   handleSelect = e => {
@@ -173,7 +172,7 @@ class Palette extends React.Component {
     window.getSelection().removeAllRanges()
     window.getSelection().addRange(code)
     document.execCommand('Copy')
-    alert('Code has been copied to clipboard :)')
+    alert('Code has been copied to your clipboard ┻━┻ ︵¯\\(ツ)/¯︵ ┻━┻')
   }
 
   handleInput = e => {
@@ -202,7 +201,9 @@ class Palette extends React.Component {
     this.setState({ rgbColors: { rgb, hex, r, g, b }, schemes })
   }
 
-  handleBlur = () => this.setState({ inputValue: '' })
+  handleBlur = () => {
+    this.setState({ inputValue: '' })
+  }
 
   render() {
     return (
@@ -228,13 +229,15 @@ class Palette extends React.Component {
           schemes={this.state.schemes}
           swatchesRef={el => (this.swatches = el)}
         />
-        {!this.state.picking && (
-          <CssCode
-            innerHTML={{ __html: this.state.css }}
-            clicked={e => this.handleSelect(e)}
-            clickedButton={this.handlePick}
-          />
-        )}
+
+        <CssCode
+          innerHTML={{ __html: this.state.css }}
+          schemes={this.state.schemes}
+          css={this.state.css}
+          clickedCreator={this.handleCreateCss}
+          clicked={e => this.handleSelect(e)}
+          clickedButton={() => this.setState({ css: '' })}
+        />
         <ColorInput
           chenged={this.handleInput}
           value={this.state.inputValue}

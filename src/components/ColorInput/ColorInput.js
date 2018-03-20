@@ -7,6 +7,7 @@ const ColorInput = props => {
   return (
     <label className="color-input" htmlFor="color-input">
       <input
+        className="color-input__element"
         type="text"
         name="color-input"
         placeholder="HEX or RGB"
