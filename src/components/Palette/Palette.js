@@ -180,8 +180,10 @@ class Palette extends React.Component {
     let rgbArr = [],
       rgb = '',
       hex = ''
-    if (!COLOR_PATTERN.test(value)) return
-    if (value.match(/^r/)) {
+    if (!COLOR_PATTERN.test(value)) {
+      this.setState({ picking: true })
+      return
+    } else if (value.match(/^r/)) {
       rgbArr = value
         .replace(/[^\d,]/g, '')
         .split(',')
@@ -197,7 +199,7 @@ class Palette extends React.Component {
     }
     const [r, g, b] = rgbArr
     const schemes = schemesGenerator(r, g, b, this.state.schemeModel)
-    this.setState({ rgbColors: { rgb, hex, r, g, b }, schemes })
+    this.setState({ rgbColors: { rgb, hex, r, g, b }, schemes, picking: false })
   }
 
   handleBlur = () => {
@@ -219,6 +221,8 @@ class Palette extends React.Component {
         <ColorInfo
           rgb={this.state.rgbColors.rgb}
           hex={this.state.rgbColors.hex}
+          picking={this.state.picking}
+          clicked={this.handlePick}
         />
         <Schemes
           checked={this.state.schemeModel}
@@ -235,7 +239,7 @@ class Palette extends React.Component {
           css={this.state.css}
           clickedCreator={this.handleCreateCss}
           clicked={e => this.handleSelect(e)}
-          clickedButton={() => this.setState({ css: '' })}
+          clickExit={() => this.setState({ css: '' })}
         />
         <ColorInput
           chenged={this.handleInput}

@@ -87,17 +87,28 @@ export const rgbStringToHex = rgb => {
 export const arrayToRgbString = arr => `rgb(${arr.join(',')})`
 
 export const hexToRgb = hex => {
-  const rgba = hex
-    .replace(
-      /^#?([a-f\d])([a-f\d])([a-f\d])([a-f\d])?$/i,
-      (m, r, g, b, a = 'f') => '#' + r + r + g + g + b + b + a + a,
-    )
-    .substring(1)
-    .match(/.{2}/g)
-    .map(x => parseInt(x, 16))
-
-  const alpha = rgba.slice(-1)[0] / 255
-  rgba.splice(3, 1, Math.round(alpha * 100) / 100)
+  let rgba = []
+  if (hex.length === 5 || hex.length > 8) {
+    rgba = hex
+      .replace(
+        /^#?([a-f\d])([a-f\d])([a-f\d])([a-f\d])?$/i,
+        (m, r, g, b, a = 'f') => '#' + r + r + g + g + b + b + a + a,
+      )
+      .substring(1)
+      .match(/.{2}/g)
+      .map(x => parseInt(x, 16))
+    const alpha = rgba.slice(-1)[0] / 255
+    rgba.splice(3, 1, Math.round(alpha * 100) / 100)
+  } else {
+    rgba = hex
+      .replace(
+        /^#?([a-f\d])([a-f\d])([a-f\d])([a-f\d])?$/i,
+        (m, r, g, b) => '#' + r + r + g + g + b + b,
+      )
+      .substring(1)
+      .match(/.{2}/g)
+      .map(x => parseInt(x, 16))
+  }
   return rgba
 }
 

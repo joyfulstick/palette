@@ -9,6 +9,13 @@
   margin: 1em;
   text-transform: uppercase;
   display: block;
+  cursor: pointer;
+}
+
+.lock::before {
+  position: absolute;
+  content: '\1f512';
+  filter: saturate(0);
 }
 
 @media (min-width: 600px) {

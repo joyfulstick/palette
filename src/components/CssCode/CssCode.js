@@ -22,7 +22,7 @@ const CssCode = props => (
           dangerouslySetInnerHTML={props.innerHTML}
           onClick={props.clicked}
         />
-        <button className="button--exit" onClick={props.clickedButton}>
+        <button className="button--exit" onClick={props.clickExit}>
           Close
         </button>
       </div>
