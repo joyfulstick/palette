@@ -59,6 +59,7 @@ class Palette extends React.Component {
 
   updateCanvas() {
     const ctx = this.canvas.getContext('2d')
+    if (ctx === null) return
     const drawCircle = () => {
       const { radius } = this.state
       const image = ctx.createImageData(2 * radius, 2 * radius)
