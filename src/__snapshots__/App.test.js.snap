@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="App"
+>
+  <main
+    className="main"
+  >
+    <section
+      className="hsv"
+    >
+      <canvas
+        className="canvas--picked"
+        height={342}
+        onClick={[Function]}
+        onMouseMove={[Function]}
+        width={342}
+      />
+      <form
+        className="range--value"
+        style={
+          Object {
+            "width": 114,
+          }
+        }
+      >
+        <input
+          className="range--value__input"
+          max="1"
+          min="0"
+          onChange={[Function]}
+          step=".01"
+          type="range"
+        />
+      </form>
+    </section>
+    <article
+      className="color-info"
+    >
+      <p>
+        <span
+          className="color-info__sample"
+          onClick={[Function]}
+          style={
+            Object {
+              "background": "",
+              "color": "",
+            }
+          }
+        >
+          rgb
+        </span>
+        
+      </p>
+      <p>
+        <span
+          className="color-info__sample"
+          onClick={[Function]}
+          style={
+            Object {
+              "background": "",
+              "color": "",
+            }
+          }
+        >
+          hex
+        </span>
+        
+      </p>
+    </article>
+    <form
+      className="schemes"
+    >
+      <label
+        className="scheme__label"
+        htmlFor="Monochromatic"
+      >
+        <input
+          checked={true}
+          id="Monochromatic"
+          name="scheme"
+          onChange={[Function]}
+          type="radio"
+          value={1}
+        />
+        Monochromatic
+      </label>
+      <label
+        className="scheme__label"
+        htmlFor="Complementary"
+      >
+        <input
+          checked={false}
+          id="Complementary"
+          name="scheme"
+          onChange={[Function]}
+          type="radio"
+          value={2}
+        />
+        Complementary
+      </label>
+      <label
+        className="scheme__label"
+        htmlFor="Triadic"
+      >
+        <input
+          checked={false}
+          id="Triadic"
+          name="scheme"
+          onChange={[Function]}
+          type="radio"
+          value={3}
+        />
+        Triadic
+      </label>
+      <label
+        className="scheme__label"
+        htmlFor="Analogous"
+      >
+        <input
+          checked={false}
+          id="Analogous"
+          name="scheme"
+          onChange={[Function]}
+          type="radio"
+          value={3.1}
+        />
+        Analogous
+      </label>
+      <label
+        className="scheme__label"
+        htmlFor="Compound"
+      >
+        <input
+          checked={false}
+          id="Compound"
+          name="scheme"
+          onChange={[Function]}
+          type="radio"
+          value={3.5}
+        />
+        Compound
+      </label>
+      <label
+        className="scheme__label"
+        htmlFor="Tetradic"
+      >
+        <input
+          checked={false}
+          id="Tetradic"
+          name="scheme"
+          onChange={[Function]}
+          type="radio"
+          value={4}
+        />
+        Tetradic
+      </label>
+    </form>
+    <section
+      className="swatches"
+    />
+    <button
+      className="button--css"
+      disabled={true}
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "not-allowed",
+        }
+      }
+    >
+      CSS
+    </button>
+    
+    <label
+      className="color-input"
+      htmlFor="color-input"
+    >
+      <input
+        className="color-input__element"
+        name="color-input"
+        onBlur={[Function]}
+        onChange={[Function]}
+        pattern="^(#[0-9a-f]{3}|#(?:[0-9a-f]{2}){2,4}|(rgb|hsl)a?\\\\((-?\\\\d+%?[,\\\\s]+){2,3}\\\\s*[\\\\d.]+%?\\\\))$"
+        placeholder="HEX or RGB"
+        type="text"
+        value=""
+      />
+    </label>
+  </main>
+</div>
+`;

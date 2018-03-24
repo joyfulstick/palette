@@ -1,13 +1,14 @@
 {
   "name": "palette",
   "homepage": "https://joyfulstick.github.io/palette",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "gh-pages": "^1.1.0",
-    "react": "^16.3.0-alpha.2",
-    "react-dom": "^16.3.0-alpha.2",
-    "react-scripts": "1.1.1"
+    "react": "^16.3.0-alpha.3",
+    "react-dom": "^16.3.0-alpha.3",
+    "react-scripts": "1.1.1",
+    "react-test-renderer": "^16.3.0-alpha.3"
   },
   "scripts": {
     "predeploy": "npm run build",
