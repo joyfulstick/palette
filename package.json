@@ -7,8 +7,10 @@
     "gh-pages": "^1.1.0",
     "react": "^16.3.0-alpha.3",
     "react-dom": "^16.3.0-alpha.3",
+    "react-redux": "^5.0.7",
     "react-scripts": "1.1.1",
-    "react-test-renderer": "^16.3.0-alpha.3"
+    "react-test-renderer": "^16.3.0-alpha.3",
+    "redux": "^3.7.2"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -17,5 +19,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/registerServiceWorker.js",
+      "!src/index.js"
+    ]
   }
 }

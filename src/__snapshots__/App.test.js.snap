@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`App renders correctly 1`] = `
 <div
   className="App"
 >
@@ -12,16 +12,16 @@ exports[`renders correctly 1`] = `
     >
       <canvas
         className="canvas--picked"
-        height={342}
+        height={2}
         onClick={[Function]}
         onMouseMove={[Function]}
-        width={342}
+        width={2}
       />
       <form
         className="range--value"
         style={
           Object {
-            "width": 114,
+            "width": 0.6666666666666666,
           }
         }
       >
@@ -189,5 +189,6 @@ exports[`renders correctly 1`] = `
       />
     </label>
   </main>
+  ,
 </div>
 `;

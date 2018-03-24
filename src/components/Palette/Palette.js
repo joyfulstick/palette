@@ -17,6 +17,7 @@ import {
   xyToPolar,
 } from '../../lib/utilities'
 import './Palette.css'
+import { connect } from 'react-redux'
 
 class Palette extends React.Component {
   state = {
@@ -37,7 +38,7 @@ class Palette extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', () => this.setRadius())
-    this.setRadius()
+    // this.setRadius()
   }
 
   componentDidUpdate() {
@@ -252,4 +253,4 @@ class Palette extends React.Component {
   }
 }
 
-export default Palette
+export default connect(null, null)(Palette)
