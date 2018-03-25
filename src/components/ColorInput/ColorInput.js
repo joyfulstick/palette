@@ -1,6 +1,6 @@
-import React from 'react'
-import { COLOR_PATTERN } from '../../constants/patterns'
 import './ColorInput.css'
+import { COLOR_PATTERN } from '../../constants/patterns'
+import React from 'react'
 
 const ColorInput = props => {
   const pattern = COLOR_PATTERN.toString().replace(/\//g, '')

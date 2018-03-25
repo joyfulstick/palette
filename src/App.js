@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Palette from './components/Palette/Palette'
-
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import reducer from './store/reducer'
+import { createStore } from 'redux'
+import reducer from './store/reducers/reducer'
 
-export const store = createStore(reducer)
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+)
 
 class App extends Component {
   render() {

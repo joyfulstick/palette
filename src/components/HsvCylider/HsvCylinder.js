@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import './HsvCylinder.css'
+import * as actions from '../../store/actions'
+import React, { Component } from 'react'
 import {
-  arrayToRgbString,
-  hexToRgb,
   hsvToRgb,
   radToDeg,
   rgbToHex,
-  rgbStringToHex,
   schemesGenerator,
   xyToPolar,
 } from '../../lib/utilities'
+import { connect } from 'react-redux'
 
 class HsvCylinder extends Component {
   state = {
@@ -100,21 +98,6 @@ class HsvCylinder extends Component {
       : this.setState({ alpha })
   }
 
-  handleValueControl = e => {
-    const { value } = e.target
-    const { r, g, b } = this.props.rgbColors
-    const schemes = schemesGenerator(
-      r * value,
-      g * value,
-      b * value,
-      this.props.schemeModel,
-    )
-    this.setState({
-      value,
-      schemes,
-    })
-  }
-
   render() {
     return (
       <section className="hsv">
@@ -141,7 +124,7 @@ class HsvCylinder extends Component {
             min="0"
             max="1"
             step=".01"
-            onChange={e => this.handleValueControl(e)}
+            onChange={e => this.props.onValueControl(e)}
           />
         </form>
       </section>
@@ -159,4 +142,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(HsvCylinder)
+const mapDispatchToProps = dispatch => {
+  return {
+    onValueControl: e => dispatch(actions.valueControl(e)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HsvCylinder)

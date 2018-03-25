@@ -1,5 +1,5 @@
-import React from 'react'
 import './ColorInfo.css'
+import React from 'react'
 
 const ColorInfo = props => (
   <article className="color-info">

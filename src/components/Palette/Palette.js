@@ -1,22 +1,18 @@
-import React from 'react'
+import './Palette.css'
+import {
+  arrayToRgbString,
+  hexToRgb,
+  rgbStringToHex,
+  schemesGenerator,
+} from '../../lib/utilities'
+import { COLOR_PATTERN } from '../../constants/patterns'
 import ColorInfo from '../ColorInfo/ColorInfo'
 import ColorInput from '../ColorInput/ColorInput'
 import CssCode from '../CssCode/CssCode'
 import HsvCylinder from '../HsvCylider/HsvCylinder'
+import React from 'react'
 import Schemes from '../Schemes/Schemes'
 import Swatches from '../Swatches/Swatches'
-import { COLOR_PATTERN } from '../../constants/patterns'
-import {
-  arrayToRgbString,
-  hexToRgb,
-  hsvToRgb,
-  radToDeg,
-  rgbToHex,
-  rgbStringToHex,
-  schemesGenerator,
-  xyToPolar,
-} from '../../lib/utilities'
-import './Palette.css'
 import { connect } from 'react-redux'
 
 class Palette extends React.Component {
@@ -34,19 +30,6 @@ class Palette extends React.Component {
     picking: true,
     css: '',
     inputValue: '',
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', () => this.setRadius())
-    // this.setRadius()
-  }
-
-  componentDidUpdate() {
-    this.updateCanvas()
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', () => this.setRadius())
   }
 
   handleSchemeChange = e => {
@@ -161,5 +144,9 @@ class Palette extends React.Component {
     )
   }
 }
+
+// const mapStateToProps = state => {
+//   return {}
+// }
 
 export default connect(null, null)(Palette)

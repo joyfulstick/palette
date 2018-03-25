@@ -133,3 +133,10 @@ export const schemesGenerator = (r, g, b, n) => {
   }
   return schemes
 }
+
+export const updatedObject = (oldObject, updatedProperties) => {
+  return {
+    ...oldObject,
+    ...updatedProperties,
+  }
+}
