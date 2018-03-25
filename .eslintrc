@@ -5,6 +5,6 @@
     "object-shorthand": 2,
     "prefer-destructuring": 2,
     "no-duplicate-imports": [2, { "includeExports": true }],
-    "sort-imports": 2
+    "sort-imports": 1
   }
 }

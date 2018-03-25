@@ -1,1 +1,1 @@
-export { valueControl } from './hsvCylinder'
+export { valueControl, getColor } from './hsvCylinder'

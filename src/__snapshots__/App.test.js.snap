@@ -40,7 +40,7 @@ exports[`App renders correctly 1`] = `
     >
       <p>
         <span
-          className="color-info__sample"
+          className="color-info__sample lock"
           onClick={[Function]}
           style={
             Object {
@@ -55,7 +55,7 @@ exports[`App renders correctly 1`] = `
       </p>
       <p>
         <span
-          className="color-info__sample"
+          className="color-info__sample lock"
           onClick={[Function]}
           style={
             Object {

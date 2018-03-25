@@ -1,5 +1,6 @@
 import './ColorInfo.css'
 import React from 'react'
+import { connect } from 'react-redux'
 
 const ColorInfo = props => (
   <article className="color-info">
@@ -25,4 +26,14 @@ const ColorInfo = props => (
   </article>
 )
 
-export default ColorInfo
+const mapStateToProps = state => {
+  const { rgb, hex } = state.rgbColors
+  const { picking } = state.picking
+  return {
+    rgb,
+    hex,
+    picking,
+  }
+}
+
+export default connect(mapStateToProps)(ColorInfo)

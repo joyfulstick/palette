@@ -1,13 +1,7 @@
 import './HsvCylinder.css'
 import * as actions from '../../store/actions'
 import React, { Component } from 'react'
-import {
-  hsvToRgb,
-  radToDeg,
-  rgbToHex,
-  schemesGenerator,
-  xyToPolar,
-} from '../../lib/utilities'
+import { hsvToRgb, radToDeg, xyToPolar } from '../../lib/utilities'
 import { connect } from 'react-redux'
 
 class HsvCylinder extends Component {
@@ -17,9 +11,10 @@ class HsvCylinder extends Component {
         ? Math.round(window.innerWidth / 6)
         : Math.round(window.innerHeight / 6),
   }
+
   componentDidMount() {
     window.addEventListener('resize', () => this.setRadius())
-    // this.setRadius()
+    if (this.canvas !== null) this.updateCanvas()
   }
 
   componentDidUpdate() {
@@ -90,12 +85,7 @@ class HsvCylinder extends Component {
     const pixel = ctx.getImageData(x, y, 1, 1)
     const { data } = pixel
     const [r, g, b, alpha] = [data[0], data[1], data[2], data[3]]
-    const schemes = schemesGenerator(r, g, b, this.props.schemeModel)
-    const rgb = `rgb(${r}, ${g}, ${b})`,
-      hex = rgbToHex(r, g, b)
-    alpha !== 0 && this.props.picking
-      ? this.setState({ rgbColors: { rgb, hex, r, g, b }, schemes, alpha })
-      : this.setState({ alpha })
+    this.props.onGetColor(r, g, b, alpha)
   }
 
   render() {
@@ -145,6 +135,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onValueControl: e => dispatch(actions.valueControl(e)),
+    onGetColor: (r, g, b, alpha) => dispatch(actions.getColor(r, g, b, alpha)),
   }
 }
 

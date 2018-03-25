@@ -112,12 +112,7 @@ class Palette extends React.Component {
     return (
       <main className="main">
         <HsvCylinder clicked={this.handlePick} />
-        <ColorInfo
-          rgb={this.state.rgbColors.rgb}
-          hex={this.state.rgbColors.hex}
-          picking={this.state.picking}
-          clicked={this.handlePick}
-        />
+        <ColorInfo clicked={this.handlePick} />
         <Schemes
           checked={this.state.schemeModel}
           chenged={e => this.handleSchemeChange(e)}

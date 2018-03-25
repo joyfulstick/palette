@@ -6,3 +6,13 @@ export const valueControl = event => {
     event,
   }
 }
+
+export const getColor = (r, g, b, alpha) => {
+  return {
+    type: actionTypes.GET_COLOR,
+    r,
+    g,
+    b,
+    alpha,
+  }
+}
