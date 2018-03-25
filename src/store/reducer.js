@@ -1,12 +1,11 @@
 const initialState = {
   value: 1,
-  radius:
-    window.innerWidth > window.innerHeight
-      ? Math.round(window.innerWidth / 6)
-      : Math.round(window.innerHeight / 6),
   rgbColors: {
     rgb: '',
     hex: '',
+    r: 0,
+    b: 0,
+    g: 0,
   },
   hsl: '',
   alpha: 0,

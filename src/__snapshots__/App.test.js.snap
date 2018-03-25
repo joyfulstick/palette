@@ -12,16 +12,16 @@ exports[`App renders correctly 1`] = `
     >
       <canvas
         className="canvas--picked"
-        height={2}
+        height={342}
         onClick={[Function]}
         onMouseMove={[Function]}
-        width={2}
+        width={342}
       />
       <form
         className="range--value"
         style={
           Object {
-            "width": 0.6666666666666666,
+            "width": 114,
           }
         }
       >
