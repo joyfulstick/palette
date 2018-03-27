@@ -1,4 +1,5 @@
 import './ColorInfo.css'
+import * as actions from '../../store/actions'
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -16,7 +17,7 @@ const ColorInfo = props => (
               background: color,
               color,
             }}
-            onClick={props.clicked}
+            onClick={props.onTogglePick}
           >
             {model}
           </span>
@@ -28,7 +29,7 @@ const ColorInfo = props => (
 
 const mapStateToProps = state => {
   const { rgb, hex } = state.rgbColors
-  const { picking } = state.picking
+  const { picking } = state
   return {
     rgb,
     hex,
@@ -36,4 +37,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(ColorInfo)
+const mapDispatchToProps = dispatch => {
+  return {
+    onTogglePick: () => dispatch(actions.togglePick()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ColorInfo)

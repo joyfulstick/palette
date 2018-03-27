@@ -1,6 +1,8 @@
-import React from 'react'
-import { COLOR_SCHEMES } from '../../constants/colorSchemes'
 import './Schemes.css'
+import * as actions from '../../store/actions'
+import { COLOR_SCHEMES } from '../../constants/colorSchemes'
+import React from 'react'
+import { connect } from 'react-redux'
 
 const Schemes = props => (
   <form className="schemes">
@@ -11,8 +13,8 @@ const Schemes = props => (
           name="scheme"
           id={scheme.name}
           value={scheme.id}
-          onChange={props.chenged}
-          checked={props.checked === scheme.id}
+          onChange={props.onSchemeChange}
+          checked={props.schemeModel === scheme.id}
         />
         {scheme.name}
       </label>
@@ -20,4 +22,17 @@ const Schemes = props => (
   </form>
 )
 
-export default Schemes
+const mapStateToProps = state => {
+  const { schemeModel } = state
+  return {
+    schemeModel,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSchemeChange: e => dispatch(actions.schemeChange(e)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Schemes)

@@ -101,7 +101,7 @@ class HsvCylinder extends Component {
           width={this.state.radius * 2}
           height={this.state.radius * 2}
           onMouseMove={e => this.handleGetColor(e)}
-          onClick={this.props.clicked}
+          onClick={this.props.onTogglePick}
         />
         {!this.props.picking && <em className="color--picked">Picked!</em>}
         <form
@@ -136,6 +136,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onValueControl: e => dispatch(actions.valueControl(e)),
     onGetColor: (r, g, b, alpha) => dispatch(actions.getColor(r, g, b, alpha)),
+    onTogglePick: () => dispatch(actions.togglePick()),
   }
 }
 

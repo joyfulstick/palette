@@ -13,7 +13,6 @@ import HsvCylinder from '../HsvCylider/HsvCylinder'
 import React from 'react'
 import Schemes from '../Schemes/Schemes'
 import Swatches from '../Swatches/Swatches'
-import { connect } from 'react-redux'
 
 class Palette extends React.Component {
   state = {
@@ -30,15 +29,6 @@ class Palette extends React.Component {
     picking: true,
     css: '',
     inputValue: '',
-  }
-
-  handleSchemeChange = e => {
-    const { r, g, b } = this.state.rgbColors
-    const schemes = schemesGenerator(r, g, b, +e.target.value)
-    this.setState({
-      schemeModel: +e.target.value,
-      schemes,
-    })
   }
 
   handleCreateCss = () => {
@@ -58,12 +48,6 @@ class Palette extends React.Component {
     )};<br/>}`
     this.setState({ css })
     // console.log(`:root{\n  ${values.join(';\n  ')};\n}`) // eslint-disable-line
-  }
-
-  handlePick = () => {
-    this.setState(prevState => {
-      return { picking: !prevState.picking }
-    })
   }
 
   handleSelect = e => {
@@ -111,12 +95,9 @@ class Palette extends React.Component {
   render() {
     return (
       <main className="main">
-        <HsvCylinder clicked={this.handlePick} />
-        <ColorInfo clicked={this.handlePick} />
-        <Schemes
-          checked={this.state.schemeModel}
-          chenged={e => this.handleSchemeChange(e)}
-        />
+        <HsvCylinder />
+        <ColorInfo />
+        <Schemes />
         <Swatches
           schemes={this.state.schemes}
           swatchesRef={el => (this.swatches = el)}
@@ -140,8 +121,4 @@ class Palette extends React.Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {}
-// }
-
-export default connect(null, null)(Palette)
+export default Palette

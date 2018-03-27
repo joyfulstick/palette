@@ -20,8 +20,8 @@ const initialState = {
 }
 
 const valueControl = (state, action) => {
-  action.event.persist()
-  const { value } = action.event.target
+  action.payload.event.persist()
+  const { value } = action.payload.event.target
   const { r, g, b } = state.rgbColors
   const schemes = schemesGenerator(
     r * value,
@@ -33,7 +33,7 @@ const valueControl = (state, action) => {
 }
 
 const getColor = (state, action) => {
-  const { r, g, b, alpha } = action
+  const { r, g, b, alpha } = action.payload
   const schemes = schemesGenerator(r, g, b, state.schemeModel)
   const rgb = `rgb(${r}, ${g}, ${b})`,
     hex = rgbToHex(r, g, b)
@@ -48,12 +48,31 @@ const getColor = (state, action) => {
   }
 }
 
+const togglePick = state => {
+  return updatedObject(state, { picking: !state.picking })
+}
+
+const schemeChange = (state, action) => {
+  action.payload.event.persist()
+  const { r, g, b } = state.rgbColors
+  const { value } = action.payload.event.target
+  const schemes = schemesGenerator(r, g, b, +value)
+  return updatedObject(state, {
+    schemeModel: +value,
+    schemes,
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.VALUE_CONTROL:
       return valueControl(state, action)
     case actionTypes.GET_COLOR:
       return getColor(state, action)
+    case actionTypes.TOGGLE_PICK:
+      return togglePick(state)
+    case actionTypes.SCHEME_CHANGE:
+      return schemeChange(state, action)
     default:
       return state
   }

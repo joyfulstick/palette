@@ -1,1 +1,2 @@
-export { valueControl, getColor } from './hsvCylinder'
+export { valueControl, getColor, togglePick } from './hsvCylinder'
+export { schemeChange } from './schemes'

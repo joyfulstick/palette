@@ -15,7 +15,7 @@ class App extends Component {
       <div className="App">
         <Provider store={store}>
           <Palette />
-        </Provider>,
+        </Provider>
       </div>
     )
   }
