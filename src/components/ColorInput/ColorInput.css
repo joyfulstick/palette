@@ -4,6 +4,7 @@
   margin: 2rem 0;
   width: 50%;
   justify-self: left;
+  color: var(--color-main);
 }
 
 .color-input__element {

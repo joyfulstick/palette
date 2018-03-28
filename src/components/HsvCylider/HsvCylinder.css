@@ -26,6 +26,7 @@ canvas {
 .range--value {
   align-self: center;
   transform: rotate(-90deg);
+  color: var(--color-main);
 }
 
 .range--value__input {

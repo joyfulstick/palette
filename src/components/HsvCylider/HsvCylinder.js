@@ -104,19 +104,22 @@ class HsvCylinder extends Component {
           onClick={this.props.onTogglePick}
         />
         {!this.props.picking && <em className="color--picked">Picked!</em>}
-        <form
+        <label
           className="range--value"
           style={{ width: this.state.radius * 2 / 3 }}
+          htmlFor="range-value"
         >
           <input
             className="range--value__input"
+            in="range-value"
             type="range"
             min="0"
             max="1"
             step=".01"
             onChange={e => this.props.onValueControl(e)}
           />
-        </form>
+          Value Control
+        </label>
       </section>
     )
   }

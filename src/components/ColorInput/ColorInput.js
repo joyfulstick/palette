@@ -33,6 +33,7 @@ class ColorInput extends Component {
           value={this.state.inputValue}
           onBlur={this.handleBlur}
         />
+        Color Input
       </label>
     )
   }

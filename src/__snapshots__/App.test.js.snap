@@ -17,8 +17,9 @@ exports[`App renders correctly 1`] = `
         onMouseMove={[Function]}
         width={342}
       />
-      <form
+      <label
         className="range--value"
+        htmlFor="range-value"
         style={
           Object {
             "width": 114,
@@ -27,13 +28,15 @@ exports[`App renders correctly 1`] = `
       >
         <input
           className="range--value__input"
+          in="range-value"
           max="1"
           min="0"
           onChange={[Function]}
           step=".01"
           type="range"
         />
-      </form>
+        Value Control
+      </label>
     </section>
     <article
       className="color-info"
@@ -187,6 +190,7 @@ exports[`App renders correctly 1`] = `
         type="text"
         value=""
       />
+      Color Input
     </label>
   </main>
 </div>
