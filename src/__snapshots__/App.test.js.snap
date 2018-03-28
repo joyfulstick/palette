@@ -47,14 +47,14 @@ exports[`App renders correctly 1`] = `
           onClick={[Function]}
           style={
             Object {
-              "background": "",
-              "color": "",
+              "background": "rgb(72,160,255)",
+              "color": "rgb(72,160,255)",
             }
           }
         >
           rgb
         </span>
-        
+        rgb(72,160,255)
       </p>
       <p>
         <span
@@ -62,14 +62,14 @@ exports[`App renders correctly 1`] = `
           onClick={[Function]}
           style={
             Object {
-              "background": "",
-              "color": "",
+              "background": "#48a0ff",
+              "color": "#48a0ff",
             }
           }
         >
           hex
         </span>
-        
+        #48a0ff
       </p>
     </article>
     <form
@@ -80,7 +80,7 @@ exports[`App renders correctly 1`] = `
         htmlFor="Monochromatic"
       >
         <input
-          checked={true}
+          checked={false}
           id="Monochromatic"
           name="scheme"
           onChange={[Function]}
@@ -94,7 +94,7 @@ exports[`App renders correctly 1`] = `
         htmlFor="Complementary"
       >
         <input
-          checked={false}
+          checked={true}
           id="Complementary"
           name="scheme"
           onChange={[Function]}
@@ -162,14 +162,116 @@ exports[`App renders correctly 1`] = `
     </form>
     <section
       className="swatches"
-    />
+      onClick={[Function]}
+    >
+      <div
+        className="swatches__samples"
+      >
+        <div
+          className="samples__color"
+          style={
+            Object {
+              "background": "#48a0ff",
+            }
+          }
+        />
+        <div
+          className="samples__color"
+          style={
+            Object {
+              "background": "#ffa748",
+            }
+          }
+        />
+      </div>
+      <div
+        className="swatches__samples"
+      >
+        <div
+          className="samples__color"
+          style={
+            Object {
+              "background": "#004fa3",
+            }
+          }
+        />
+        <div
+          className="samples__color"
+          style={
+            Object {
+              "background": "#a35500",
+            }
+          }
+        />
+      </div>
+      <div
+        className="swatches__samples"
+      >
+        <div
+          className="samples__color"
+          style={
+            Object {
+              "background": "#00346d",
+            }
+          }
+        />
+        <div
+          className="samples__color"
+          style={
+            Object {
+              "background": "#6d3900",
+            }
+          }
+        />
+      </div>
+      <div
+        className="swatches__samples"
+      >
+        <div
+          className="samples__color"
+          style={
+            Object {
+              "background": "#002752",
+            }
+          }
+        />
+        <div
+          className="samples__color"
+          style={
+            Object {
+              "background": "#522a00",
+            }
+          }
+        />
+      </div>
+      <div
+        className="swatches__samples"
+      >
+        <div
+          className="samples__color"
+          style={
+            Object {
+              "background": "#001f41",
+            }
+          }
+        />
+        <div
+          className="samples__color"
+          style={
+            Object {
+              "background": "#412200",
+            }
+          }
+        />
+      </div>
+    </section>
     <button
       className="button--css"
-      disabled={true}
+      disabled={false}
       onClick={[Function]}
       style={
         Object {
-          "cursor": "not-allowed",
+          "cursor": "pointer",
         }
       }
     >

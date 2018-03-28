@@ -2,6 +2,7 @@
   grid-area: 4 / 2;
   min-width: 4rem;
   width: 1fr;
+  cursor: pointer;
 }
 
 .swatches__samples {

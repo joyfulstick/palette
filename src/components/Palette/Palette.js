@@ -47,7 +47,10 @@ class Palette extends React.Component {
         <HsvCylinder />
         <ColorInfo />
         <Schemes />
-        <Swatches swatchesRef={el => (this.swatches = el)} />
+        <Swatches
+          swatchesRef={el => (this.swatches = el)}
+          clickedCreator={this.handleCreateCss}
+        />
         <CssCode
           innerHTML={{ __html: this.state.css }}
           css={this.state.css}

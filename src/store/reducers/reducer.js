@@ -13,16 +13,22 @@ import { COLOR_PATTERN } from '../../constants/patterns'
 const initialState = {
   value: 1,
   rgbColors: {
-    rgb: '',
-    hex: '',
-    r: 0,
-    b: 0,
-    g: 0,
+    rgb: 'rgb(72,160,255)',
+    hex: '#48a0ff',
+    r: 72,
+    g: 160,
+    b: 255,
   },
   hsl: '',
   alpha: 0,
-  schemeModel: 1,
-  schemes: [],
+  schemeModel: 2,
+  schemes: [
+    ['#48a0ff', '#ffa748'],
+    ['#004fa3', '#a35500'],
+    ['#00346d', '#6d3900'],
+    ['#002752', '#522a00'],
+    ['#001f41', '#412200'],
+  ],
   picking: true,
 }
 
@@ -37,7 +43,7 @@ const valueControl = (state, action) => {
     b * value,
     state.schemeModel,
   )
-  return updatedObject(state, { value, schemes })
+  return updatedObject(state, { value, schemes, picking: false })
 }
 
 const getColor = (state, action) => {

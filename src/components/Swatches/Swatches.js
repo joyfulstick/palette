@@ -3,7 +3,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 const Swatches = props => (
-  <section ref={props.swatchesRef} className="swatches">
+  <section
+    ref={props.swatchesRef}
+    className="swatches"
+    onClick={props.clickedCreator}
+  >
     {props.schemes.map((swatch, i) => (
       <div className="swatches__samples" key={i}>
         {swatch.map((color, i) => (
