@@ -1,5 +1,6 @@
-import React from 'react'
 import './CssCode.css'
+import React from 'react'
+import { connect } from 'react-redux'
 
 const CssCode = props => (
   <React.Fragment>
@@ -30,4 +31,11 @@ const CssCode = props => (
   </React.Fragment>
 )
 
-export default CssCode
+const mapStateToProps = state => {
+  const { schemes } = state
+  return {
+    schemes,
+  }
+}
+
+export default connect(mapStateToProps)(CssCode)

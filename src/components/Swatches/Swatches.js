@@ -1,5 +1,6 @@
-import React from 'react'
 import './Swatches.css'
+import React from 'react'
+import { connect } from 'react-redux'
 
 const Swatches = props => (
   <section ref={props.swatchesRef} className="swatches">
@@ -17,4 +18,11 @@ const Swatches = props => (
   </section>
 )
 
-export default Swatches
+const mapStateToProps = state => {
+  const { schemes } = state
+  return {
+    schemes,
+  }
+}
+
+export default connect(mapStateToProps)(Swatches)

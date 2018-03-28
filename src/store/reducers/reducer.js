@@ -1,5 +1,14 @@
 import * as actionTypes from '../actions/actionTypes'
-import { rgbToHex, schemesGenerator, updatedObject } from '../../lib/utilities'
+import {
+  arrayToRgbString,
+  hexToRgb,
+  rgbStringToHex,
+  rgbToHex,
+  schemesGenerator,
+  updatedObject,
+} from '../../lib/utilities'
+
+import { COLOR_PATTERN } from '../../constants/patterns'
 
 const initialState = {
   value: 1,
@@ -15,13 +24,12 @@ const initialState = {
   schemeModel: 1,
   schemes: [],
   picking: true,
-  css: '',
-  inputValue: '',
 }
 
 const valueControl = (state, action) => {
   action.payload.event.persist()
-  const { value } = action.payload.event.target
+  let { value } = action.payload.event.target
+  value = +value
   const { r, g, b } = state.rgbColors
   const schemes = schemesGenerator(
     r * value,
@@ -63,6 +71,38 @@ const schemeChange = (state, action) => {
   })
 }
 
+const inputValue = (state, action) => {
+  const { value } = action.payload
+  let rgbArr = [],
+    rgb = '',
+    hex = '',
+    hsl = ''
+  if (!COLOR_PATTERN.test(value)) {
+    return updatedObject(state, { picking: true })
+  } else if (value.match(/^r/)) {
+    rgbArr = value
+      .replace(/[^\d,]/g, '')
+      .split(',')
+      .map(x => +x)
+    rgb = value
+    hex = rgbStringToHex(value)
+  } else if (value.match(/^#/)) {
+    rgbArr = hexToRgb(value)
+    rgb = arrayToRgbString(rgbArr)
+    hex = value
+  } else if (value.match(/^h/)) {
+    hsl = value
+  }
+  const [r, g, b] = rgbArr
+  const schemes = schemesGenerator(r, g, b, state.schemeModel)
+  return updatedObject(state, {
+    rgbColors: { rgb, hex, r, g, b },
+    schemes,
+    hsl,
+    picking: false,
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.VALUE_CONTROL:
@@ -73,6 +113,8 @@ const reducer = (state = initialState, action) => {
       return togglePick(state)
     case actionTypes.SCHEME_CHANGE:
       return schemeChange(state, action)
+    case actionTypes.INPUT_VALUE:
+      return inputValue(state, action)
     default:
       return state
   }
