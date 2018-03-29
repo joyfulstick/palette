@@ -44,7 +44,7 @@ class HsvCylinder extends Component {
 
       for (let x = -radius; x < radius; x++) {
         for (let y = -radius; y < radius; y++) {
-          const [r, phi] = xyToPolar(x, y)
+          const [r, phi] = xyToPolar(y, -x)
 
           if (r > radius) continue
 

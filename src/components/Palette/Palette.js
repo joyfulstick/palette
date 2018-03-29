@@ -38,7 +38,7 @@ class Palette extends React.Component {
     window.getSelection().removeAllRanges()
     window.getSelection().addRange(code)
     document.execCommand('Copy')
-    alert('Code has been copied to your clipboard ┻━┻ ︵¯\\(ツ)/¯︵ ┻━┻')
+    alert('Code has been copied to your clipboard\n┻━┻ ︵¯\\(ツ)/¯︵ ┻━┻')
   }
 
   render() {

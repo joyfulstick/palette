@@ -9,13 +9,14 @@ body {
   font-family: sans-serif;
   color: var(--color-font);
   background: var(--color-main);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-input[type=range] {
+input[type='range'] {
   appearance: none;
   width: 100%;
 }
 
-input[type=range]:focus {
+input[type='range']:focus {
   outline: none;
 }

@@ -32,7 +32,7 @@
 .button--css {
   grid-area: 2 / 2;
   align-self: start;
-  margin: 2rem 0;
+  margin: 2rem;
   width: 20%;
   justify-self: right;
 }
