@@ -25,19 +25,16 @@
   background: none;
   border: none;
   outline: none;
-  color: #9cf0ff;
+  color: var(--color-theme);
   cursor: pointer;
 }
 
 .button--css {
   grid-area: 2 / 2;
   align-self: start;
-  margin: 2rem;
+  margin: 2rem 2rem 0 0;
   width: 20%;
   justify-self: right;
-}
-
-@media (min-width: 600px) {
 }
 
 @media (min-width: 900px) {
