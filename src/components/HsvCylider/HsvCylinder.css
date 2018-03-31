@@ -2,6 +2,7 @@
   grid-area: 1 / 2;
   display: flex;
   position: relative;
+  touch-action: none;
 }
 
 .canvas--picking {

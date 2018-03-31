@@ -24,3 +24,15 @@ export const togglePick = () => {
     type: actionTypes.TOGGLE_PICK,
   }
 }
+
+export const setPickingToTrue = () => {
+  return {
+    type: actionTypes.PICKING_TRUE,
+  }
+}
+
+export const setPickingToFalse = () => {
+  return {
+    type: actionTypes.PICKING_FALSE,
+  }
+}

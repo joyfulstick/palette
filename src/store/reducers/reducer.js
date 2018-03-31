@@ -48,6 +48,7 @@ const valueControl = (state, action) => {
 
 const getColor = (state, action) => {
   const { r, g, b, alpha } = action.payload
+  // console.log(r)
   const schemes = schemesGenerator(r, g, b, state.schemeModel)
   const rgb = `rgb(${r}, ${g}, ${b})`,
     hex = rgbToHex(r, g, b)
@@ -64,6 +65,14 @@ const getColor = (state, action) => {
 
 const togglePick = state => {
   return updatedObject(state, { picking: !state.picking })
+}
+
+const setPickingToTrue = state => {
+  return updatedObject(state, { picking: true })
+}
+
+const setPickingToFalse = state => {
+  return updatedObject(state, { picking: false })
 }
 
 const schemeChange = (state, action) => {
@@ -84,7 +93,7 @@ const inputValue = (state, action) => {
     hex = '',
     hsl = ''
   if (!COLOR_PATTERN.test(value)) {
-    return updatedObject(state, { picking: true })
+    return setPickingToTrue(state)
   } else if (value.match(/^r/)) {
     rgbArr = value
       .replace(/[^\d,]/g, '')
@@ -121,6 +130,10 @@ const reducer = (state = initialState, action) => {
       return schemeChange(state, action)
     case actionTypes.INPUT_VALUE:
       return inputValue(state, action)
+    case actionTypes.PICKING_TRUE:
+      return setPickingToTrue(state, action)
+    case actionTypes.PICKING_FALSE:
+      return setPickingToFalse(state, action)
     default:
       return state
   }

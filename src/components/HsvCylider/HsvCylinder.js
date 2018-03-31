@@ -76,16 +76,32 @@ class HsvCylinder extends Component {
     drawCircle()
   }
 
-  handleGetColor(event) {
+  handleGetColor = event => {
+    event.preventDefault()
     const { canvas } = this
     const ctx = canvas.getContext('2d')
     const bound = canvas.getBoundingClientRect()
-    const x = event.clientX - bound.x
-    const y = event.clientY - bound.y
+    let clientX, clientY
+    /* eslint-disable */
+    if (event.touches) {
+      clientX = event.touches[0].clientX
+      clientY = event.touches[0].clientY
+    } else {
+      clientX = event.clientX
+      clientY = event.clientY
+    }
+    /* eslint-enable */
+    const x = clientX - bound.x
+    const y = clientY - bound.y
     const pixel = ctx.getImageData(x, y, 1, 1)
     const { data } = pixel
-    const [r, g, b, alpha] = [data[0], data[1], data[2], data[3]]
+    let [r, g, b, alpha] = [data[0], data[1], data[2], data[3]]
     this.props.onGetColor(r, g, b, alpha)
+  }
+
+  handleTouchStart = event => {
+    this.props.onPickingToTrue()
+    this.handleGetColor(event)
   }
 
   render() {
@@ -100,8 +116,12 @@ class HsvCylinder extends Component {
           ref={el => (this.canvas = el)}
           width={this.state.radius * 2}
           height={this.state.radius * 2}
+          onMouseDown={this.props.onTogglePick}
           onMouseMove={e => this.handleGetColor(e)}
-          onClick={this.props.onTogglePick}
+          onMouseUp={e => this.handleGetColor(e)}
+          onTouchStart={e => this.handleTouchStart(e)}
+          onTouchMove={e => this.handleGetColor(e)}
+          onTouchEnd={this.props.onPickingToFalse}
         />
         {!this.props.picking && <em className="color--picked">Picked!</em>}
         <label
@@ -140,6 +160,8 @@ const mapDispatchToProps = dispatch => {
     onValueControl: e => dispatch(actions.valueControl(e)),
     onGetColor: (r, g, b, alpha) => dispatch(actions.getColor(r, g, b, alpha)),
     onTogglePick: () => dispatch(actions.togglePick()),
+    onPickingToTrue: () => dispatch(actions.setPickingToTrue()),
+    onPickingToFalse: () => dispatch(actions.setPickingToFalse()),
   }
 }
 
