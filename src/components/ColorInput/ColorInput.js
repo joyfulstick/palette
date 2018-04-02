@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { COLOR_PATTERN } from '../../constants/patterns'
 import { connect } from 'react-redux'
 
-class ColorInput extends Component {
+export class ColorInput extends Component {
   state = {
     inputValue: '',
   }
